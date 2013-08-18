@@ -267,13 +267,26 @@ h1 {
 }
 
 
+.float_full .anne{
+   display:block;
+   overflow:hidden;
+   margin: 0 auto;
+   width: 100%;
+  
+
+}
 
 
 
 #project_wrapper {
-    background-color: #d1e4ea;        
-    padding-left: 80px;
     margin-top: 200px;
+    
+
+}
+
+#anne_bg{
+   background-color: #d1e4ea; 
+     
     padding-top: 30px;
 
 }
