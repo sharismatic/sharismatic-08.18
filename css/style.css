@@ -267,32 +267,31 @@ h1 {
 }
 
 
-.float_full .anne{
-   display:block;
-   overflow:hidden;
-   margin: 0 auto;
-   width: 100%;
-  
-
-}
-
 
 
 #project_wrapper {
-    margin-top: 200px;
+    margin-top: 160px;
+    width: 100%;
+    display:block;
     
 
 }
 
 #anne_bg{
    background-color: #d1e4ea; 
-     
     padding-top: 30px;
+    padding-right: 300px;
+
+}
+
+#wildcat_bg{
+  background-color: #ccebe5; 
+  padding-top: 30px;
 
 }
 
 #project_copy {
-    margin-left: 110px;
+    margin-left: 155px;
     line-height: 30px;
 }
 
@@ -302,9 +301,7 @@ h1 {
     font-weight: 100;
     font-size: 13px;
     line-height: 16px;
-
-
-
+    padding-bottom: 25px;
 }
 
 #project_copy h3{
@@ -312,6 +309,9 @@ h1 {
     font-weight: 200;
     color: #3ab8d2;
     letter-spacing: 1px;
+    text-transform: uppercase;
+    font-style: italic;
+    line-height: 40px;
 
 }
 
@@ -321,9 +321,10 @@ h1 {
 }
 
 .project_view img{
-    padding-bottom: 30px;
+    padding-bottom: 40px;
     width: 900px;
-    margin-left: 30px;
+    margin-left: 90px;
+    padding-right: 90px;
 }
 
 #work_wrapper {
@@ -577,8 +578,8 @@ h1 {
     #project_wrapper {
         background-color: #d1e4ea;        
         padding-left: 20px;
-        margin-top: 200px;
-        padding-top: 30px;
+    
+       
 
     }
 
@@ -643,7 +644,7 @@ h1 {
      width: 240px;
      padding-top: 50px;
      display: block;
-     margin-right: 50px;
+     margin-right: 45px;
     }
 
 
@@ -673,13 +674,12 @@ h1 {
     #project_wrapper {
     background-color: #d1e4ea;        
     padding-left: 10px;
-    margin-top: 200px;
-    padding-top: 30px;
+  
 
 }
 
     #project_copy {
-        margin-left: 70px;
+        margin-left: 80px;
         line-height: 30px;
     }
 
@@ -761,8 +761,7 @@ h1 {
     #project_wrapper {
         background-color: #d1e4ea;        
         padding-left: 10px;
-        margin-top: 200px;
-        padding-top: 30px;
+    
 
     }
 
