@@ -266,6 +266,92 @@ h1 {
 
 
 
+/* contact form styles*/
+
+.float_full_contact {
+   display:block;
+   overflow:hidden;
+   margin: 0 auto;
+   width: 400px;
+
+}
+
+.float_full_contact h2{
+  font-family: 'Roboto', sans-serif;
+  color: #3ab8d2;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+
+}
+
+.standard_input {
+    background: #fff; 
+    padding: 5px 10px;
+    color: solid 1px #ccc;
+    font-size: 13px;
+     width: 400px;
+    font-family: 'helvetica';
+    text-transform: uppercase;
+    letter-spacing: 1px;
+     margin-top: 20px;
+  }
+
+  .break{
+    margin-top: 10px;
+    padding-left: 0px; 
+
+  }
+
+  
+  
+.button {
+  -moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+  box-shadow:inset 0px 1px 0px 0px #dcecfb;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #befaf7), color-stop(1, #3ab3d1) );
+  background:-moz-linear-gradient( center top, #befaf7 5%, #3ab3d1 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#befaf7', endColorstr='#3ab3d1');
+  background-color:#befaf7;
+  -webkit-border-top-left-radius:3px;
+  -moz-border-radius-topleft:3px;
+  border-top-left-radius:3px;
+  -webkit-border-top-right-radius:3px;
+  -moz-border-radius-topright:3px;
+  border-top-right-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  -moz-border-radius-bottomright:3px;
+  border-bottom-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -moz-border-radius-bottomleft:3px;
+  border-bottom-left-radius:3px;
+  text-indent:0px;
+  display:inline-block;
+  color:#d5f0f5;
+  font-family:'Roboto';
+  text-transform: uppercase;
+  font-size:15px;
+  font-weight:400;
+  font-style:normal;
+  height:25px;
+  line-height:15px;
+  width:84px;
+  text-decoration:none;
+  text-align:center;
+  text-shadow:1px 1px 0px #54c4cc;
+}
+.button:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3ab3d1), color-stop(1, #befaf7) );
+  background:-moz-linear-gradient( center top, #3ab3d1 5%, #befaf7 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3ab3d1', endColorstr='#befaf7');
+  background-color:#3ab3d1;
+}.button:active {
+  position:relative;
+  top:1px;
+}
+
+
+/*project styles*/
 
 
 #project_wrapper {
@@ -776,6 +862,18 @@ h1 {
     .work1{
         margin-left: 70px;
     }
+
+    .standard_input {
+    background: #fff; 
+    padding: 5px 10px;
+    color: solid 1px #ccc;
+    font-size: 13px;
+     width: 300px;
+    font-family: 'helvetica';
+    text-transform: uppercase;
+    letter-spacing: 1px;
+     margin-top: 20px;
+  }
 
     #footer_contents{
         width: 400px;

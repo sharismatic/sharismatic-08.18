@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>A Very Basic Form</title>
+
+	<style type="text/css">
+	
+	
+	.standard_input {
+		background: #fff;	
+		padding: 5px 10px;
+		color: solid 1px #ccc;
+		font-size: 13px;
+		display: block;
+		width: 400px;
+		margin-top: 20px;
+		font-family: 'helvetica';
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	h1{
+		font-family: 'helvetica';
+		text-transform: uppercase;
+
+	}
+	.break{
+		margin-top: 10px;
+		padding-left: 10px;	
+
+	}
+
+	.submit_button{
+		background-color: #ccc;
+		width: 100px;
+		height: 20px;
+	}
+	</style>
+
+
+</head>
+
+<body>
+
+	<h1>
+		Contact
+	</h1>
+	<form method"post" action="/login.php">
+		
+		<input type="text" id="first_name" name="first_name" class="standard_input" placeholder="First Name"/>
+		<input type="email" id="email" name="email" class="standard_input" placeholder="Email"/>
+		<input type="password" name="password" id="password" class="standard_input" placeholder="Phone no."/>
+		<textarea name="comments" id="comments" class="standard_input" placeholder="What can I do for you today?"></textarea>
+		
+		
+
+		
+		
+		<div class="break">
+			<input class="submit_button" type="submit" value="submit the form" name="submit"/>
+		</div>
+
+	</form>
+
+	<div class="container">
+
+
+
+	</div><!-- .container -->
+</body>
+
+</html>
