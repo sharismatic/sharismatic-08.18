@@ -428,6 +428,7 @@ h1 {
 #work_wrapper {
   display: block;
   margin-left: 40px;
+  margin-top: 40px;
 }
 
 #works{
@@ -511,16 +512,52 @@ h1 {
 
 }
 
+/*ABOUT STYLES*/
 
 #about_main{
     width: 100%;
     height: 100%;
+    z-index: 40;
 
 }
 
-#about_main #blue {
-    height: 300px;
+#about_main .blue {
+    height: 250px;
     background-color: #3ad6dc; 
+    display: block;
+
+}
+#about_main .about_copy{
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 60px;
+    z-index: 20;
+}
+#about_main .about_img{
+    margin-left: 47%;
+    margin-top: 20px;
+    position: fixed;
+    z-index: 10;
+}
+
+#about_main .yellow {
+    height: 250px;
+    background-color: rgb(255,246,117); 
+}
+#about_main .coral {
+    height: 250px;
+    background-color: rgb(255,124,107); 
+}
+
+#about_main .purple {
+    height: 250px;
+    background-color: rgb(209,154, 225); 
+}
+
+#about_main .purple {
+    height: 250px;
+    background-color: rgb(209,154, 225); 
 }
 
 /* FOOTER STYLES */
