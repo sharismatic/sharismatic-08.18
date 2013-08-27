@@ -23,24 +23,30 @@ function initWorkEffects() {
 	console.log( work )
 }
 
+
+
+
 function ajaxText() {
 	var work = $('.work1');
 	work.click( function() {
-		// grab the URL (data-url)
+		//find('data-url')
+		
 		// make the request to THAT url
 		// once you get back the data, empty out the container and replace
 		// remove #work-wrapper
 		// you can expect project wrapper, append that to .float_full
 		// "DUMMY" -> have one $project-wrapper display:none
-		$.ajax( 
-			{
-				url: "http://mottaquikarim.com/services/fragments/?url=http://sharismatic.com/08.18/float_container_anne.html",
-				dataType: "jsonp",
-				success: function( data ) {
-					
-				}
-			}
-		);
+		$.ajax(
+	{
+		url: 'http://mottaquikarim.com/services/fragments/?url=http://sharismatic.com/08.18/float_container_anne.html',
+		type: 'GET',
+		dataType: 'jsonp',
+		success: function( data ) {
+			$('body').html( data.html )
+			console.log( data );
+		}		
+	}
+);
 	})
 }
 
