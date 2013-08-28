@@ -29,7 +29,9 @@ function initWorkEffects() {
 function ajaxText() {
 	var work = $('.work1');
 	work.click( function() {
+		$('this').find('data-url');
 		//find('data-url')
+		console.log('this');
 		
 		// make the request to THAT url
 		// once you get back the data, empty out the container and replace
@@ -38,7 +40,7 @@ function ajaxText() {
 		// "DUMMY" -> have one $project-wrapper display:none
 		$.ajax(
 	{
-		url: 'http://mottaquikarim.com/services/fragments/?url=http://sharismatic.com/08.18/float_container_anne.html',
+		url: 'http://mottaquikarim.com/services/fragments/?url=http://mottaquikar.im/shar/modules/float_container_anne.html',
 		type: 'GET',
 		dataType: 'jsonp',
 		success: function( data ) {
