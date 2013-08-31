@@ -47,8 +47,8 @@ function initAjax() {
 						console.log( data );
 						var html = data.html;
 						var workWrapper = $('.float_work').find('#work_wrapper');
-						workWrapper.slideUp(1500, function() {
-							$('.float_work').append( data.html ).hide().slideDown();
+						workWrapper.fadeOut(500, function() {
+							$('.float_work').append( data.html ).hide().fadeIn();
 						});
 					}		
 				}
