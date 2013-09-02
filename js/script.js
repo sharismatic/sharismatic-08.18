@@ -1,6 +1,7 @@
 function initAll() {
 	initHovers();
 	initAjax();
+	contact();
 }
 
 initAll();
@@ -38,11 +39,11 @@ function initAjax() {
 			var myUrl = LOCATION_URL+self.attr('data-url');
 			// if oyu want to add a spinner, add it here 
 			$.ajax(
-				{
-					url: myUrl, 
-					type: 'GET',
-					dataType: 'jsonp',
-					success: function( data ) {
+			{
+				url: myUrl, 
+				type: 'GET',
+				dataType: 'jsonp',
+				success: function( data ) {
 						//$('body').html( data.html )
 						console.log( data );
 						var html = data.html;
@@ -52,18 +53,21 @@ function initAjax() {
 						});
 					}		
 				}
-			);
+				);
 
 		}	
-	);
+		);
 
 }
 
-$("#contact").click(function(){
-	$("#form").show('fast')
-	
+function contact(){
+	console.log('contact');
 
-});
+	$("#contact").click(function(){
+		
+		$("#form").css('display','block');
 
+	});
 
+}
 

@@ -597,7 +597,9 @@ body.work_page #project_wrapper { margin-top: 0px; }
   height: 50px;  
 }
 
-
+#form{
+  display: none;
+}
 
 #contact {
   margin-top: 20px;
@@ -610,8 +612,9 @@ body.work_page #project_wrapper { margin-top: 0px; }
   text-transform: uppercase;
   font-size: 16px;
   font-weight: 300;
-  padding: 5px;
+  padding: 2px, 4px, 2px, 4px;
   background-color: #f1f9f4;
+  border-radius: 2px;
 }
 
 .float_full_contact {
