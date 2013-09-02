@@ -47,7 +47,7 @@ function initAjax() {
 						console.log( data );
 						var html = data.html;
 						var workWrapper = $('.float_work').find('#work_wrapper');
-						workWrapper.fadeOut(500, function() {
+						workWrapper.fadeOut('fast', function() {
 							$('.float_work').append( data.html ).hide().fadeIn();
 						});
 					}		
