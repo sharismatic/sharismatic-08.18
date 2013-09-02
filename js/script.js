@@ -58,3 +58,12 @@ function initAjax() {
 	);
 
 }
+
+$("#contact").click(function(){
+	$("#form").show('fast')
+	
+
+});
+
+
+
