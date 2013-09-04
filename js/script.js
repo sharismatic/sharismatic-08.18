@@ -2,6 +2,7 @@ function initAll() {
 	initHovers();
 	initAjax();
 	contact();
+	setUpForm();
 }
 
 initAll();
@@ -21,8 +22,11 @@ function initHovers() {
 		$(this).find('.panel').stop().fadeOut();
 	});
 }
-
+// GLOBALS
 var LOCATION_URL = "http://mottaquikarim.com/services/fragments/?url=http://mottaquikar.im/shar/modules/";
+var EMAIL_TO = 'shar@sharismatic.com';
+var EMAIL_URL = "http://mottaquikarim.com/services/email/";
+
 function initAjax() {
 	// METHOD: init all ajax calls for .work1
 	// should ONLY execute IF data-url attr defined
@@ -54,30 +58,112 @@ function initAjax() {
 					}		
 				}
 				);
-
+		return false;
 		}	
 		);
 
 }
-
-/*function contact(){
-	console.log('contact');
-
-	$("#contact").click(function(){
-		
-		$("#form").css('display','block');
-
-	}); 
-
-}*/
 	
-	function contact(){
+function contact(){
+	$("#contact").click(function(){
+		$("#form").toggle('slow');
 
-		$("#contact").click(function(){
-			$("#form").toggle('slow');
+		return false;
+	});
+}
 
-		});
+
+function validate_form(){
+	console.log('validating form...');
+
+	$('#form .contact_form span').hide();
+
+	//save input values as variables
+	var name = $("#name").val();
+	var email= $ ("#email").val();
+	var phone = $("#phone").val();
+	var comments = $("#comments").val();
+
+	//create variable for the total number of errors
+	var num_errors = 0;
+
+	//validate name
+	if(name.length < 1){
+
+		$("#name_error").show();
+		num_errors = num_errors + 1;
+
+	}
+
+	if(comments.length < 1){
+
+		$("#comment_error").show();
+		num_errors ++;
+
 	}
 
 
 
+	var regex = /^\d{3}-?\d{3}-?\d{4}$/g;
+	if (regex.test(phone) == false){
+		$("#user_ph_error").show();
+		num_errors ++;
+	}
+
+	var email_regex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/
+	if (email_regex.test(email)== false){
+		$("#user_email_error").show();
+		num_errors ++;
+	}
+
+	if(num_errors == 0){
+		return {
+			name: name,
+			email: email,
+			phone: phone,
+			comments: comments
+		};
+		//submit_form (name, age ,phone, email);
+	} else {
+		return -1;
+	}
+}
+
+function setUpForm() {
+	// METHOD: set up contact form ajax
+	var form = $('.contact_form');
+
+	if ( form.length == 0 ) return;
+
+	// if we made it here, kosher to send ajax
+	form.submit( function() {
+		var isValid = validate_form();
+		if ( isValid == -1 ) return;
+		
+		// if we are here, safe to make AJAX request
+		var dataObj = {
+			emailFrom: isValid.email
+			, emailTo: EMAIL_TO
+			, emailText: "NAME: "+isValid.name+"\n"+
+						 "PHONE: "+isValid.phone+"\n"+
+						 "COMMENTS: "+isValid.comments
+		}
+
+		$.ajax(
+			{
+				url: EMAIL_URL, 
+				type: 'POST',
+				dataType: 'jsonp',
+				data: dataObj,
+				success: function( data ) {
+					console.log( data )
+				}		
+			}
+		);
+
+		console.log( dataObj )
+
+		return false;
+	})
+
+}
