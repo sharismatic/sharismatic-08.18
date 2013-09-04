@@ -60,14 +60,24 @@ function initAjax() {
 
 }
 
-function contact(){
+/*function contact(){
 	console.log('contact');
 
 	$("#contact").click(function(){
 		
 		$("#form").css('display','block');
 
-	});
+	}); 
 
-}
+}*/
+	
+	function contact(){
+
+		$("#contact").click(function(){
+			$("#form").toggle('slow');
+
+		});
+	}
+
+
 
