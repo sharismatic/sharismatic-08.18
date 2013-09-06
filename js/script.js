@@ -53,8 +53,14 @@ function initAjax() {
 						var html = data.html;
 						var workWrapper = $('.float_work').find('#work_wrapper');
 						workWrapper.fadeOut('fast', function() {
-							$('.float_work').append( data.html ).hide().fadeIn();
+							$('.float_work')
+								.append( data.html )
+								.hide()
+								.fadeIn( 200, function() {
+									close_this();
+								});
 						});
+
 					}		
 				}
 				);
@@ -62,6 +68,28 @@ function initAjax() {
 		}	
 		);
 
+}
+
+function close_this(){
+	$("#close a").click(function(){
+		//define projectWrapper
+		var projectWrapper = $('#project_wrapper');
+		//if project wrapper is not there STOP
+		if ( !projectWrapper.length ) return false;
+		//define workWrapper
+		var workWrapper = $('#work_wrapper');
+		//if workWrapper is not there STOP
+		if ( !workWrapper.length ) return false;
+
+		
+		//fade out projectWrapper and then fade in workWrapper
+		projectWrapper.fadeOut( 200, function(){
+			workWrapper.fadeIn();
+		});
+
+		return false;
+
+	});
 }
 	
 function contact(){
@@ -167,3 +195,5 @@ function setUpForm() {
 	})
 
 }
+
+
