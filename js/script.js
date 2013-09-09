@@ -23,75 +23,59 @@ function initHovers() {
 	});
 }
 // GLOBALS
-var LOCATION_URL = "http://mottaquikarim.com/services/fragments/?url=http://mottaquikar.im/shar/modules/";
-var EMAIL_TO = 'shar@sharismatic.com';
-var EMAIL_URL = "http://mottaquikarim.com/services/email/";
+var LOCATION_URL = "http://sharismatic.com/site/fragments/?url=http://www.sharismatic.com/site/modules/";
+var EMAIL_URL = "http://sharismatic.com/site/email/app/email_module.php";
 
 function initAjax() {
 	// METHOD: init all ajax calls for .work1
 	// should ONLY execute IF data-url attr defined
 	var work = $(".work1");
+	//var myUrl= LOCATION_URL;
+	
 
 	if ( work.length == 0 ) return;
 
 	work.click(
 		function() {
 			var self = $(this);
-			// check if data-url is defined
 			if ( typeof self.attr('data-url') == "undefined" ) return;
 			
-			var myUrl = LOCATION_URL+self.attr('data-url');
-			// if oyu want to add a spinner, add it here 
-			$.ajax(
-			{
-				url: myUrl, 
-				type: 'GET',
-				dataType: 'jsonp',
-				success: function( data ) {
-						//$('body').html( data.html )
-						console.log( data );
-						var html = data.html;
-						var workWrapper = $('.float_work').find('#work_wrapper');
-						workWrapper.fadeOut('fast', function() {
-							$('.float_work')
-								.append( data.html )
-								.hide()
-								.fadeIn( 200, function() {
-									close_this();
-								});
-						});
+			var myUrl = self.attr('data-url');
 
-					}		
-				}
-				);
-		return false;
-		}	
-		);
+			History.pushState( {}, '', myUrl);
+			return false;
+		}
+	);
 
 }
 
 function close_this(){
 	$("#close a").click(function(){
-		//define projectWrapper
-		var projectWrapper = $('#project_wrapper');
-		//if project wrapper is not there STOP
-		if ( !projectWrapper.length ) return false;
-		//define workWrapper
-		var workWrapper = $('#work_wrapper');
-		//if workWrapper is not there STOP
-		if ( !workWrapper.length ) return false;
-
-		
-		//fade out projectWrapper and then fade in workWrapper
-		projectWrapper.fadeOut( 200, function(){
-			workWrapper.fadeIn();
-		});
-
+		perform_close();
 		return false;
 
 	});
 }
+
+function perform_close() {
+	//define projectWrapper
+	var projectWrapper = $('#project_wrapper');
+	//if project wrapper is not there STOP
+	if ( !projectWrapper.length ) return false;
+	//define workWrapper
+	var workWrapper = $('#work_wrapper');
+	//if workWrapper is not there STOP
+	if ( !workWrapper.length ) return false;
+
 	
+	//fade out projectWrapper and then fade in workWrapper
+	projectWrapper.fadeOut( 200, function(){
+		workWrapper.fadeIn();
+		projectWrapper.remove();
+		window.location.hash = "";
+	});
+
+}
 function contact(){
 	$("#contact").click(function(){
 		$("#form").toggle('slow');
@@ -102,15 +86,15 @@ function contact(){
 
 
 function validate_form(){
-	console.log('validating form...');
+	
 
 	$('#form .contact_form span').hide();
 
 	//save input values as variables
 	var name = $("#name").val();
-	var email= $ ("#email").val();
+	var email= $ ("#emailFrom").val();
 	var phone = $("#phone").val();
-	var comments = $("#comments").val();
+	var comments = $("#emailText").val();
 
 	//create variable for the total number of errors
 	var num_errors = 0;
@@ -143,6 +127,8 @@ function validate_form(){
 		$("#user_email_error").show();
 		num_errors ++;
 	}
+	console.log( '########## EMAIL HERE')
+	console.log( email )
 
 	if(num_errors == 0){
 		return {
@@ -166,34 +152,103 @@ function setUpForm() {
 	// if we made it here, kosher to send ajax
 	form.submit( function() {
 		var isValid = validate_form();
-		if ( isValid == -1 ) return;
+
+		if ( isValid == -1 ) return false;
 		
 		// if we are here, safe to make AJAX request
 		var dataObj = {
-			emailFrom: isValid.email
-			, emailTo: EMAIL_TO
-			, emailText: "NAME: "+isValid.name+"\n"+
-						 "PHONE: "+isValid.phone+"\n"+
-						 "COMMENTS: "+isValid.comments
+			name: isValid.email
+							, emailFrom: isValid.email
+							, phone: isValid.phone
+							, emailText: isValid.comments
 		}
 
+		console.log( '######### setUpForm');
+		console.log( dataObj )
+
+		$.ajax(
+					{
+						type: "POST",
+						url: EMAIL_URL,
+						data: {
+							name: isValid.email
+							, emailFrom: isValid.email
+							, phone: isValid.phone
+							, emailText: isValid.comments
+							
+						},
+						dataType: 'jsonp',
+						success: function( data ) {
+							console.log( data )
+							if ( data == "Success!") {
+								// do something here
+							}
+						},
+						error: function( textStatus ) {
+							console.log( textStatus.responseText );
+						}
+					}
+				);	
+				return false;
+			});
+
+}
+// HOW TO SELECT DATA ATTRIBUTE
+// $('input[data-url='+URL FRAGMENT+']')
+
+var _check_change = function(){
+	if( History.busy()){
+		console.log("busy");
+		setTimeout( function(){
+			_check_change();
+		}, 200);
+		return;
+	}
+        //# grab the URL
+        var State = History.getState(); // Note: We are using History.getState() instead of event.state
+        var url = parseUri( State.hash );
+
+        // find the DOM item with data-url = [ url ]
+        var item = $('div[data-url="'+url+'"]');
+        console.log( item )
+        if ( item.length == 0 ) {
+        	perform_close();
+        	return;
+        }
+
+        // if we are here, it has found the URL 
 		$.ajax(
 			{
-				url: EMAIL_URL, 
-				type: 'POST',
+				url: LOCATION_URL+url, 
+				type: 'GET',
 				dataType: 'jsonp',
-				data: dataObj,
 				success: function( data ) {
-					console.log( data )
+						//$('body').html( data.html )
+						console.log( data );
+						var html = data.html;
+						var workWrapper = $('.float_work').find('#work_wrapper');
+						workWrapper.fadeOut('fast', function() {
+							$('.float_work')
+								.append( data.html )
+								.hide()
+								.fadeIn( 200, function() {
+									close_this();
+								});
+						});
+
 				}		
 			}
 		);
 
-		console.log( dataObj )
+};
 
-		return false;
-	})
-
+function parseUri( url ) {
+	var urlBits = url.split('\/');
+	return urlBits.pop();
 }
 
-
+History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+    //alert( "statechange: " + History.getHash() );
+    //var State = History.getState(); // Note: We are using History.getState() instead of event.state
+    _check_change();
+});
