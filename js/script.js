@@ -3,6 +3,7 @@ function initAll() {
 	initAjax();
 	contact();
 	setUpForm();
+	
 }
 
 initAll();
@@ -44,8 +45,16 @@ function initAjax() {
 
 			History.pushState( {}, '', myUrl);
 			return false;
+
+
+			 $("html, body").animate({ scrollTop: 0 });
+    			return false;
+
+
 		}
-	);
+		);
+
+		
 
 }
 
@@ -158,39 +167,39 @@ function setUpForm() {
 		// if we are here, safe to make AJAX request
 		var dataObj = {
 			name: isValid.email
-							, emailFrom: isValid.email
-							, phone: isValid.phone
-							, emailText: isValid.comments
+			, emailFrom: isValid.email
+			, phone: isValid.phone
+			, emailText: isValid.comments
 		}
 
 		console.log( '######### setUpForm');
 		console.log( dataObj )
 
 		$.ajax(
-					{
-						type: "POST",
-						url: EMAIL_URL,
-						data: {
-							name: isValid.email
-							, emailFrom: isValid.email
-							, phone: isValid.phone
-							, emailText: isValid.comments
-							
-						},
-						dataType: 'jsonp',
-						success: function( data ) {
-							console.log( data )
-							if ( data == "Success!") {
-								// do something here
-							}
-						},
-						error: function( textStatus ) {
-							console.log( textStatus.responseText );
-						}
-					}
-				);	
-				return false;
-			});
+		{
+			type: "POST",
+			url: EMAIL_URL,
+			data: {
+				name: isValid.email
+				, emailFrom: isValid.email
+				, phone: isValid.phone
+				, emailText: isValid.comments
+
+			},
+			dataType: 'jsonp',
+			success: function( data ) {
+				console.log( data )
+				if ( data == "Success!") {
+					$("#form").empty();
+				}
+			},
+			error: function( textStatus ) {
+				console.log( textStatus.responseText );
+			}
+		}
+		);	
+		return false;
+	});
 
 }
 // HOW TO SELECT DATA ATTRIBUTE
@@ -216,36 +225,76 @@ var _check_change = function(){
         	return;
         }
 
+        //SPINNER
+
+        	$.fn.spin = function(opts) {
+			this.each(function() {
+				var $this = $(this),
+					spinner = $this.data('spinner');
+ 
+				if (spinner) spinner.stop();
+				if (opts !== false) {
+				  opts = $.extend({color: $this.css('color')}, opts);
+				  spinner = new Spinner(opts).spin(this);
+				  $this.data('spinner', spinner);
+				}
+			});
+			return this;
+		};
+		$(function() {
+			$(".spinner-link").click(function(e) {
+				e.preventDefault();
+				$(this).hide();
+				var opts = {
+				  lines: 12, // The number of lines to draw
+				  length: 7, // The length of each line
+				  width: 5, // The line thickness
+				  radius: 10, // The radius of the inner circle
+				  color: '#fff', // #rbg or #rrggbb
+				  speed: 1, // Rounds per second
+				  trail: 66, // Afterglow percentage
+				  shadow: true // Whether to render a shadow
+				};
+				$("#spin").show().spin(opts);
+				
+ 
+				
+			});
+		});
+
+
+
+
         // if we are here, it has found the URL 
-		$.ajax(
-			{
-				url: LOCATION_URL+url, 
-				type: 'GET',
-				dataType: 'jsonp',
-				success: function( data ) {
+        $.ajax(
+        {
+        	url: LOCATION_URL+url, 
+        	type: 'GET',
+        	dataType: 'jsonp',
+        	success: function( data ) {
 						//$('body').html( data.html )
 						console.log( data );
 						var html = data.html;
 						var workWrapper = $('.float_work').find('#work_wrapper');
 						workWrapper.fadeOut('fast', function() {
 							$('.float_work')
-								.append( data.html )
-								.hide()
-								.fadeIn( 200, function() {
-									close_this();
-								});
+							.append( data.html )
+							.hide()
+							.fadeIn( 200, function() {
+								close_this();
+							});
 						});
 
-				}		
-			}
-		);
+					}		
+				}
+				);
 
-};
+    };
 
-function parseUri( url ) {
-	var urlBits = url.split('\/');
-	return urlBits.pop();
-}
+    function parseUri( url ) {
+    	var urlBits = url.split('\/');
+    	return urlBits.pop();
+    }
 
 History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
     //alert( "statechange: " + History.getHash() );
