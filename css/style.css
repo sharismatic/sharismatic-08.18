@@ -884,7 +884,7 @@ body.work_page #project_wrapper { margin-top: 0px; }
 
 @media only screen and (max-width: 900px){
   #container{
-    width:900px;
+    
     display:block;
     overflow: hidden;
   }
